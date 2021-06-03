@@ -1,0 +1,21 @@
+#!/usr/bin/env ruby
+# skyhooks
+
+# 20210604
+# 0.0.0
+
+def dir
+  File.expand_path(ARGV[0]) || '.'
+end
+
+def test_filenames
+  Dir.glob("#{dir}/**/*.rb")
+end
+
+def main
+  test_filenames.each do |test_filename|
+    p test_filename
+  end
+end
+
+main
