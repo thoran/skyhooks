@@ -2,10 +2,10 @@
 # skyhooks
 
 # 20210604
-# 0.0.2
+# 0.0.3
 
 require 'Array/match'
-require 'File/grep'
+require 'File/self.gsubX'
 
 RAILS_EXCLUSIONS = [
   /spec_helper/,
@@ -26,8 +26,7 @@ end
 
 def main
   test_filenames.each do |test_filename|
-    p test_filename
-    p File.new(test_filename).grep(/FactoryBot\.build/)
+    File.gsub!(test_filename, /FactoryBot\.create/, 'FactoryBot.build')
   end
 end
 
