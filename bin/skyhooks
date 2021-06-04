@@ -2,7 +2,7 @@
 # skyhooks
 
 # 20210604
-# 0.0.3
+# 0.0.4
 
 require 'Array/match'
 require 'File/self.gsubX'
@@ -27,6 +27,9 @@ end
 def main
   test_filenames.each do |test_filename|
     File.gsub!(test_filename, /FactoryBot\.create/, 'FactoryBot.build')
+    system("rspec #{test_filename}")
+    next if $?.exitstatus.zero?
+    system("git checkout #{test_filename}")
   end
 end
 
