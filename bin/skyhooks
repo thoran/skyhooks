@@ -2,18 +2,11 @@
 # skyhooks
 
 # 20230225
-# 0.2.3
+# 0.3.0
 
-# Changes:
-# 1. Goes to the next file without running rspec if gsub! doesn't change the file.
-# 0/1
-# 2. ~ main(): /rspec/bin\/rspec/
-# 3. ~ main(): minor tweaks in output.
-# 1/2
-# 4. ~ RAILS_EXCLUSIONS to include shared files by default (at least for now.)
-# 2/3
-# 5. ~ main(): /bin\/rspec/rspec/
-# 6. + ./lib
+# Changes since 0.2:
+# 1. + bundle_gemfile
+# 2. ~ main(): Use bundle_gemfile.
 
 root_dir = File.dirname(File.dirname(File.expand_path(__FILE__)))
 $LOAD_PATH.unshift(root_dir) unless $LOAD_PATH.include?(root_dir)
@@ -35,6 +28,10 @@ RAILS_EXCLUSIONS = [
 
 def dir_or_file
   File.expand_path(ARGV[0]) || '.'
+end
+
+def bundle_gemfile
+  File.expand_path(ARGV[1]) || 'Gemfile'
 end
 
 def test_filenames
@@ -60,8 +57,8 @@ def main
     else
       FileUtils.rm("#{test_filename}.orig")
     end
-    p("rspec #{test_filename}")
-    system("rspec #{test_filename}")
+    p("BUNDLE_GEMFILE=#{bundle_gemfile} rspec #{test_filename}")
+    system("BUNDLE_GEMFILE=#{bundle_gemfile} rspec #{test_filename}")
     next if $?.exitstatus.zero?
     p("git checkout #{test_filename}")
     system("git checkout #{test_filename}")
