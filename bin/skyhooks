@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 # skyhooks
 
-# 20220507
-# 0.2.2
+# 20230225
+# 0.2.3
 
 # Changes:
 # 1. Goes to the next file without running rspec if gsub! doesn't change the file.
@@ -11,6 +11,9 @@
 # 3. ~ main(): minor tweaks in output.
 # 1/2
 # 4. ~ RAILS_EXCLUSIONS to include shared files by default (at least for now.)
+# 2/3
+# 5. ~ main(): /bin\/rspec/rspec/
+# 6. + ./lib
 
 root_dir = File.dirname(File.dirname(File.expand_path(__FILE__)))
 $LOAD_PATH.unshift(root_dir) unless $LOAD_PATH.include?(root_dir)
@@ -57,8 +60,8 @@ def main
     else
       FileUtils.rm("#{test_filename}.orig")
     end
-    p("bin/rspec #{test_filename}")
-    system("bin/rspec #{test_filename}")
+    p("rspec #{test_filename}")
+    system("rspec #{test_filename}")
     next if $?.exitstatus.zero?
     p("git checkout #{test_filename}")
     system("git checkout #{test_filename}")
