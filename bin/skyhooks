@@ -1,16 +1,20 @@
 #!/usr/bin/env ruby
 # skyhooks
 
-# 20210616
-# 0.1.2
+# 20210617
+# 0.2.0
+
+# Changes:
+# 1. Goes to the next file without running rspec if gsub! doesn't change the file.
 
 require 'Array/match'
 require 'File/self.gsubX'
+require 'fileutils'
 
 RAILS_EXCLUSIONS = [
-  /spec_helper/,
-  /helpers/,
   /factories/,
+  /fixtures/,
+  /spec_helper/,
   /support/
 ]
 
@@ -30,7 +34,15 @@ end
 
 def main
   test_filenames.each do |test_filename|
+    FileUtils.cp(test_filename, "#{test_filename}.orig")
     File.gsub!(test_filename, /FactoryBot\.create/, 'FactoryBot.build')
+    `diff #{test_filename}.orig #{test_filename}`
+    if $?.exitstatus.zero? # If there is no difference...
+      FileUtils.rm("#{test_filename}.orig")
+      next
+    else
+      FileUtils.rm("#{test_filename}.orig")
+    end
     system("rspec #{test_filename}")
     next if $?.exitstatus.zero?
     system("git checkout #{test_filename}")
