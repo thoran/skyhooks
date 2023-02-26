@@ -2,9 +2,10 @@
 # skyhooks
 
 # 20210604
-# 0.0.1
+# 0.0.2
 
 require 'Array/match'
+require 'File/grep'
 
 RAILS_EXCLUSIONS = [
   /spec_helper/,
@@ -18,14 +19,15 @@ def dir
 end
 
 def test_filenames
-  Dir.glob("#{dir}/**/*.rb").reject! do |filename|
-    !RAILS_EXCLUSIONS.match(filename).empty?
+  Dir.glob("#{dir}/**/*.rb").select do |filename|
+    RAILS_EXCLUSIONS.match(filename).empty?
   end
 end
 
 def main
   test_filenames.each do |test_filename|
     p test_filename
+    p File.new(test_filename).grep(/FactoryBot\.build/)
   end
 end
 
