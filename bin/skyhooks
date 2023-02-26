@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 # skyhooks
 
-# 20210604
-# 0.1.1
+# 20210616
+# 0.1.2
 
 require 'Array/match'
 require 'File/self.gsubX'
@@ -14,18 +14,12 @@ RAILS_EXCLUSIONS = [
   /support/
 ]
 
-def dir?
-  @dirQ
-end
-
 def dir_or_file
-  dir_or_file = File.expand_path(ARGV[0]) || '.'
-  @dirQ = File.directory?(dir_or_file)
-  dir_or_file
+  File.expand_path(ARGV[0]) || '.'
 end
 
 def test_filenames
-  if dir?
+  if File.directory?(dir_or_file)
     Dir.glob("#{dir_or_file}/**/*.rb").select do |filename|
       RAILS_EXCLUSIONS.match(filename).empty?
     end
