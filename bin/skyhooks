@@ -1,14 +1,16 @@
 #!/usr/bin/env ruby
 # skyhooks
 
-# 20220505
-# 0.2.1
+# 20220507
+# 0.2.2
 
 # Changes:
 # 1. Goes to the next file without running rspec if gsub! doesn't change the file.
 # 0/1
 # 2. ~ main(): /rspec/bin\/rspec/
 # 3. ~ main(): minor tweaks in output.
+# 1/2
+# 4. ~ RAILS_EXCLUSIONS to include shared files by default (at least for now.)
 
 root_dir = File.dirname(File.dirname(File.expand_path(__FILE__)))
 $LOAD_PATH.unshift(root_dir) unless $LOAD_PATH.include?(root_dir)
@@ -24,7 +26,8 @@ RAILS_EXCLUSIONS = [
   /factories/,
   /fixtures/,
   /spec_helper/,
-  /support/
+  /support/,
+  /shared/,
 ]
 
 def dir_or_file
