@@ -1,13 +1,15 @@
-# File/self.gsubX
-# File.gsub!
+# Thoran/File/SelfGsubX/self.gsubX.rb
+# Thoran::File::SelfGsubX#gsub!
 
-# 20180806
-# 0.1.0
+# 20230226
+# 0.1.1
 
 # Description: This takes a file and replaces any text it finds according to a regular expression with a supplied string.
 
 # Changes since 0.0:
 # 1. + Thoran namespace.
+# 0/1
+# 2. Fixed the file title.
 
 module Thoran
   module File
