@@ -2,7 +2,7 @@
 # skyhooks
 
 # 20210604
-# 0.1.0
+# 0.1.1
 
 require 'Array/match'
 require 'File/self.gsubX'
