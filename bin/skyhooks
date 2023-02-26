@@ -1,12 +1,16 @@
 #!/usr/bin/env ruby
 # skyhooks
 
-# 20230225
-# 0.3.0
+# 20230226
+# 0.3.1
 
 # Changes since 0.2:
 # 1. + bundle_gemfile
 # 2. ~ main(): Use bundle_gemfile.
+# 0/1
+# 3. Update lib/Array/match.rb to use Thoran namespaced version thereby matching lib/File/self.gsubX.
+# 4. Update lib/File/self.gsubX.rb with correct commented header.
+# 5. + README.md
 
 root_dir = File.dirname(File.dirname(File.expand_path(__FILE__)))
 $LOAD_PATH.unshift(root_dir) unless $LOAD_PATH.include?(root_dir)
