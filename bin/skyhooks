@@ -2,14 +2,25 @@
 # skyhooks
 
 # 20210604
-# 0.0.0
+# 0.0.1
+
+require 'Array/match'
+
+RAILS_EXCLUSIONS = [
+  /spec_helper/,
+  /helpers/,
+  /factories/,
+  /support/
+]
 
 def dir
   File.expand_path(ARGV[0]) || '.'
 end
 
 def test_filenames
-  Dir.glob("#{dir}/**/*.rb")
+  Dir.glob("#{dir}/**/*.rb").reject! do |filename|
+    !RAILS_EXCLUSIONS.match(filename).empty?
+  end
 end
 
 def main
