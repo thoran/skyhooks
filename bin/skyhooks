@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 # skyhooks
 
-# 20230226
-# 0.3.1
+# 20260807
+# 0.3.2
 
 # Changes since 0.2:
 # 1. + bundle_gemfile
@@ -11,6 +11,8 @@
 # 3. Update lib/Array/match.rb to use Thoran namespaced version thereby matching lib/File/self.gsubX.
 # 4. Update lib/File/self.gsubX.rb with correct commented header.
 # 5. + README.md
+# 1/2: Make the script executable.
+# 6. ~ bin/skyhooks: mode 100644 --> 100755. A script carrying a shebang and not the bit to go with it cannot be run from a clone at all. Homebrew's bin.install had been setting the bit on the way past, so nothing showed until the formula moved to libexec.install, which keeps whatever mode the repository has.
 
 root_dir = File.dirname(File.dirname(File.expand_path(__FILE__)))
 $LOAD_PATH.unshift(root_dir) unless $LOAD_PATH.include?(root_dir)
