@@ -1,8 +1,8 @@
 #!/usr/bin/env ruby
 # skyhooks
 
-# 20260816
-# 0.4.1
+# 20260821
+# 0.4.2
 
 root_dir = File.dirname(File.dirname(File.expand_path(__FILE__)))
 $LOAD_PATH.unshift(root_dir) unless $LOAD_PATH.include?(root_dir)

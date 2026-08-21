@@ -35,3 +35,8 @@ $ skyhooks
 1. Use `build_stubbed` in preference to `build` as it is lighter weight.
 2. At present this will change all instances of `create` to `build` in a file, such that opportunities to change some instances will be missed. So, use a binary search algorithm within a file, so as to be able to alter those files where some instances of `create` can be swapped out, but not all.
 3. Change instances of `build` to `build_stubbed`.
+
+
+## License
+
+MIT
